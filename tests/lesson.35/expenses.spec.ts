@@ -29,6 +29,8 @@ test.describe("Fuel Expenses tests", () => {
   test("Correct adding of expense with valid data", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData();
 
+    console.log(yesterdayDate);
+
     await app.expensesPage.navigate();
     await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.addNewExpense(mileage, numberOfLiters, totalCost, undefined, yesterdayDate);
