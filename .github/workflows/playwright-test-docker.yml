@@ -14,17 +14,17 @@ jobs:
 
     steps:
 
-      - name: Check environment
-        run: |
-          node -v
-          npm -v
-          npm ls @faker-js/faker typescript
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check environment
+        run: |
+          node -v
+          npm -v
+          npm ls @faker-js/faker typescript
 
       - name: Run Playwright tests
         run: npx playwright test --project=e2e
