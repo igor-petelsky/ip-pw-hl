@@ -13,6 +13,13 @@ jobs:
        HTTP_PASSWORD: ${{ secrets.HTTP_PASSWORD }}
 
     steps:
+
+      - name: Check environment
+        run: |
+          node -v
+          npm -v
+          npm ls @faker-js/faker typescript
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
