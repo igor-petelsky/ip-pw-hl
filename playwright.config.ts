@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,22 +22,22 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://qauto.forstudy.space/',
+    baseURL: "https://qauto.forstudy.space/",
 
     httpCredentials: {
-      username: 'guest',
-      password: 'welcome2qauto',
+      username: "guest",
+      password: "welcome2qauto",
     },
-    testIdAttribute: 'qa-id',
+    testIdAttribute: "qa-id",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
-    video: 'on',
-    screenshot: 'on',
+    trace: "on",
+    video: "on",
+    screenshot: "on",
     // launchOptions: {
     //   slowMo: 3000
     // },
@@ -46,14 +46,20 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'setup',
-      testMatch: '**/setup/**.setup.ts',
-      // workers: 1 (old pw vers?)
+      name: "setup",
+      testMatch: "**/setup/**.setup.ts",
+      // workers: 1 (unsupported: old pw vers?)
     },
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-      dependencies: ['setup'],
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+      dependencies: ["setup"],
+    },
+    {
+      name: "e2e",
+      use: { ...devices["Desktop Chrome"] },
+      dependencies: ["setup"],
+      testMatch: "tests/lesson.35/*"
     },
 
     // {

@@ -2,10 +2,10 @@
   "cookies": [
     {
       "name": "sid",
-      "value": "s%3AcXroXQxDbu9Knfoy94-TGoJ2htsMCrWW.8bdFoeTpAHgZGMXMXpkSaysMNKqSZpgfa%2BS5ZWXz0T4",
+      "value": "s%3AIJmuqaQ0KPFkxaK7JF3IL113arFn-BUh.gj3TbiEOTXed1KBPUEAtklpj%2B%2FcFmCu%2BNPCUMaImk0A",
       "domain": ".forstudy.space",
       "path": "/",
-      "expires": 1792705987,
+      "expires": 1793138887,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
