@@ -10,21 +10,21 @@ export class DateUtils {
 
   static getDateWithOffset(days: number, pattern = this.DOT): string {
     const date = new Date();
-    date.setDate(date.getDate() + days);
+    date.setUTCDate(date.getDate() + days);
 
     return this.formatDate(date, pattern);
   }
 
   static getDateWithMonthOffset(months: number, pattern = this.DOT): string {
     const date = new Date();
-    date.setMonth(date.getMonth() + months);
+    date.setUTCMonth(date.getMonth() + months);
 
     return this.formatDate(date, pattern);
   }
 
   static getDateWithYearOffset(years: number, pattern = this.DOT): string {
     const date = new Date();
-    date.setFullYear(date.getFullYear() + years);
+    date.setUTCFullYear(date.getFullYear() + years);
 
     return this.formatDate(date, pattern);
   }

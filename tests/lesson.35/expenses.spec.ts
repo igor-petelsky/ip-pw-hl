@@ -13,8 +13,6 @@ import { faker } from "@faker-js/faker";
 import { generateExpenseData } from "../../utils/factories/expenses.factory";
 import { DateUtils } from "../../utils/date/dateUtils";
 
-const yesterdayDate = DateUtils.getDateWithOffset(-1);
-
 test.describe("Fuel Expenses tests", () => {
   let garageService: GarageService;
 
@@ -28,13 +26,12 @@ test.describe("Fuel Expenses tests", () => {
 
   test("Correct adding of expense with valid data", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData();
-
-    console.log(yesterdayDate);
+    const todayDate = DateUtils.getDateWithOffset(0);
 
     await app.expensesPage.navigate();
     await app.expensesPage.openAddExpenseForm();
-    await app.addExpenseForm.addNewExpense(mileage, numberOfLiters, totalCost, undefined, yesterdayDate);
-    await app.expensesPage.verifyLastExpense(yesterdayDate, mileage, numberOfLiters, totalCost);
+    await app.addExpenseForm.addNewExpense(mileage, numberOfLiters, totalCost);
+    await app.expensesPage.verifyLastExpense(todayDate, mileage, numberOfLiters, totalCost);
   });
 
   test("Validation - future date", async ({ app }) => {
@@ -60,7 +57,7 @@ test.describe("Fuel Expenses tests", () => {
 
     const newMileage = await app.addExpenseForm.mileageField.inputValue();
 
-    await app.addExpenseForm.addNewExpense(newMileage, numberOfLiters, totalCost, undefined, yesterdayDate);
+    await app.addExpenseForm.addNewExpense(newMileage, numberOfLiters, totalCost);
     await expect(app.addExpenseForm.lessOrEqualMileageErrorMessage).toBeVisible();
   });
 
