@@ -1,3 +1,4 @@
+import { step } from '../../../utils/reports/decorator';
 import { BaseForm } from './BaseForm';
 
 export class EditProfileForm extends BaseForm {
@@ -12,31 +13,36 @@ export class EditProfileForm extends BaseForm {
     public readonly invalidCountryErrorMessage = this.page.locator('.invalid-feedback p', { hasText: 'Country is invalid' });
     public readonly invalidLengthCountryErrorMessage = this.page.locator('.invalid-feedback p', { hasText: 'Country has to be from 2 to 20 characters long' });
 
+    @step()
     async enterName(name: string) {
         await this.nameField.fill(name);
         await this.nameField.blur();
     }
 
+    @step()
     async enterLastName(lastName: string) {
         await this.lastNameField.fill(lastName);
         await this.lastNameField.blur();
     }
 
+    @step()
     async enterCountry(country: string) {
         await this.countryField.fill(country);
         await this.countryField.blur();
     }
 
+    @step()
     async enterBirthday(birthday: string) {
         await this.birthdayField.fill(birthday);
     }
 
+    @step()
     async addPhoto(imagePath: string) {
         await this.photoField.setInputFiles(imagePath);
     }
 
+    @step()
     async clickSaveButton() {
         await this.saveButton.click();
     }
-
 }
