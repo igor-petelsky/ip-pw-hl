@@ -1,4 +1,4 @@
-import { BasePage } from "./BasePage";
+import { BasePage } from "../base/BasePage";
 
 export class ProfilePage extends BasePage {
 

@@ -1,6 +1,6 @@
 import { expect, Locator } from "@playwright/test";
-import { BaseForm } from "./BaseForm";
-import { step } from "../../../utils/reports/decorator";
+import { BaseForm } from "../base/BaseForm";
+import { step } from "../../utils/reports/decorator";
 
 export class AddCarForm extends BaseForm {
   public readonly formTitle = this.page.locator(".modal-title", { hasText: "Add a car" });

@@ -1,6 +1,6 @@
 import { expect, Locator } from "@playwright/test";
-import { BasePage } from "./BasePage";
-import { step } from "../../../utils/reports/decorator";
+import { BasePage } from "../base/BasePage";
+import { step } from "../../utils/reports/decorator";
 
 export class ExpensesPage extends BasePage {
   private readonly pageHeading: Locator = this.page.getByRole("heading", { name: "Fuel expenses" });
@@ -17,13 +17,13 @@ export class ExpensesPage extends BasePage {
     await this.page.waitForTimeout(300);
   }
 
-  @step("Check last expense")
+  @step()
   async verifyLastExpense(expectedDate: string, expectedMileage: string, expectedLiters: string, expectedCost: string) {
     const formattedCost = expectedCost.includes(".") ? `${expectedCost} USD` : `${expectedCost}.00 USD`;
 
-    await expect(this.lastAddedExpenseEntry.locator("td").nth(0)).toHaveText(expectedDate);
-    await expect(this.lastAddedExpenseEntry.locator("td").nth(1)).toHaveText(expectedMileage);
-    await expect(this.lastAddedExpenseEntry.locator("td").nth(2)).toHaveText(`${expectedLiters}L`);
-    await expect(this.lastAddedExpenseEntry.locator("td").nth(3)).toHaveText(formattedCost);
+    await this.checkTextEquals(this.lastAddedExpenseEntry.locator("td").nth(0), expectedDate);
+    await this.checkTextEquals(this.lastAddedExpenseEntry.locator("td").nth(1), expectedMileage);
+    await this.checkTextEquals(this.lastAddedExpenseEntry.locator("td").nth(2), `${expectedLiters}L`);
+    await this.checkTextEquals(this.lastAddedExpenseEntry.locator("td").nth(3), formattedCost);
   }
 }

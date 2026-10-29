@@ -1,5 +1,5 @@
 import { Locator } from "@playwright/test";
-import { BasePage } from "./BasePage";
+import { BasePage } from "../base/BasePage";
 
 export class GaragePage extends BasePage {
   public readonly userProfileDropdown: Locator = this.page.locator("#userNavDropdown");

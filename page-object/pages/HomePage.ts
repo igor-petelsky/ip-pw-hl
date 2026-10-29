@@ -1,5 +1,5 @@
 import { Locator } from "@playwright/test";
-import { BasePage } from "./BasePage";
+import { BasePage } from "../base/BasePage";
 
 export class HomePage extends BasePage {
   private readonly signInButton: Locator = this.page.getByRole("button", { name: "Sign In" });

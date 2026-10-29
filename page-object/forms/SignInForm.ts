@@ -1,6 +1,6 @@
 import { Locator } from "@playwright/test";
-import { BaseForm } from "./BaseForm";
-import { step } from "../../../utils/reports/decorator";
+import { BaseForm } from "../base/BaseForm";
+import { step } from "../../utils/reports/decorator";
 
 export class SignInForm extends BaseForm {
   private readonly emailField: Locator = this.page.getByRole("textbox", { name: "Email" });

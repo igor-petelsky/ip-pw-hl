@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
-import { GaragePage } from "../../lesson.23/PageObject/pages/GaragePage";
-import { AddCarForm } from "../../lesson.23/PageObject/forms/AddCarForm";
+import { GaragePage } from "../../page-object/pages/GaragePage";
+import { AddCarForm } from "../../page-object/forms/AddCarForm";
 
 test.describe('Garage tests', () => {
     let garagePage: GaragePage;

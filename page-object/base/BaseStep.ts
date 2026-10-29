@@ -1,19 +1,13 @@
 import { expect, Locator, Page } from "@playwright/test";
 
-export class BasePage {
+export class BaseStep {
   protected readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;
   }
 
-  async navigate(path: string) {
-    await this.page.goto(path);
-  }
-
   protected async checkTextEquals(element: Locator, expectedText: string) {
-    await expect(element).toBeVisible();
-
     const elementName = this.getLocatorName(element);
 
     console.info(`Checking element '${elementName}' text equals '${expectedText}'`);

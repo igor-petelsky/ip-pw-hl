@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
-import { HomePage } from "../../lesson.23/PageObject/pages/HomePage";
-import { SignUpForm } from "../../lesson.23/PageObject/forms/SignUpForm";
-import { GaragePage } from "../../lesson.23/PageObject/pages/GaragePage";
+import { HomePage } from "../../page-object/pages/HomePage";
+import { SignUpForm } from "../../page-object/forms/SignUpForm";
+import { GaragePage } from "../../page-object/pages/GaragePage";
 
 test.describe("Sign up tests with POM", () => {
   let homePage: HomePage;

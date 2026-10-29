@@ -1,12 +1,12 @@
 import { test as base, Page } from "@playwright/test";
-import { SignInForm } from "../../lesson.23/PageObject/forms/SignInForm";
-import { GaragePage } from "../../lesson.23/PageObject/pages/GaragePage";
-import { AddCarForm } from "../../lesson.23/PageObject/forms/AddCarForm";
-import { HomePage } from "../../lesson.23/PageObject/pages/HomePage";
-import { AddExpenseForm } from "../../lesson.23/PageObject/forms/AddExpenseForm";
-import { ExpensesPage } from "../../lesson.23/PageObject/pages//ExpensesPage";
-import { ProfilePage } from "../../lesson.23/PageObject/pages/ProfilePage";
-import { EditProfileForm } from "../../lesson.23/PageObject/forms/EditProfileForm";
+import { SignInForm } from "../../page-object/forms/SignInForm";
+import { GaragePage } from "../../page-object/pages/GaragePage";
+import { AddCarForm } from "../../page-object/forms/AddCarForm";
+import { HomePage } from "../../page-object/pages/HomePage";
+import { AddExpenseForm } from "../../page-object/forms/AddExpenseForm";
+import { ExpensesPage } from "../../page-object/pages/ExpensesPage";
+import { ProfilePage } from "../../page-object/pages/ProfilePage";
+import { EditProfileForm } from "../../page-object/forms/EditProfileForm";
 
 type App = {
   page: Page;

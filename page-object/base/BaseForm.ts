@@ -1,11 +1,11 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { step } from "../../../utils/reports/decorator";
+import { step } from "../../utils/reports/decorator";
+import { BaseStep } from "./BaseStep";
 
-export class BaseForm {
-  protected readonly page: Page;
+export class BaseForm extends BaseStep{
 
-  constructor(page: Page) {
-    this.page = page;
+constructor(page: Page) {
+    super(page);
   }
 
   @step()

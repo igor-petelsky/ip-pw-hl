@@ -1,7 +1,7 @@
 import test, { expect } from "@playwright/test";
-import { HomePage } from "../../lesson.23/PageObject/pages/HomePage";
-import { SignInForm } from "../../lesson.23/PageObject/forms/SignInForm";
-import { GaragePage } from "../../lesson.23/PageObject/pages/GaragePage";
+import { HomePage } from "../../page-object/pages/HomePage";
+import { SignInForm } from "../../page-object/forms/SignInForm";
+import { GaragePage } from "../../page-object/pages/GaragePage";
 import { testUser1 } from "../../test-data/validUsers";
 import { generateRandomEmail, generateRandomPassword, generateWrongEmailFormat } from "../../utils/credentials";
 
