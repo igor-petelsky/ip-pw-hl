@@ -13,8 +13,7 @@ export class ExpensesPage extends BasePage {
 
   @step()
   async openAddExpenseForm() {
-    await this.addExpenseButton.click();
-    await this.page.waitForTimeout(300);
+    await this.clickAndWaitForResponse(this.addExpenseButton, "expense");
   }
 
   @step()

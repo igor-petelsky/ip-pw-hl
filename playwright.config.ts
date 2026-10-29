@@ -22,7 +22,11 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: "html",
+  reporter: [["html"], ["./utils/reports/CustomReporter.ts"]],
+  expect: {
+    timeout: 5_000,
+  },
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -59,7 +63,7 @@ export default defineConfig({
       name: "e2e",
       use: { ...devices["Desktop Chrome"] },
       dependencies: ["setup"],
-      testMatch: "tests/lesson.35/*"
+      testMatch: "tests/lesson.35/*",
     },
 
     // {

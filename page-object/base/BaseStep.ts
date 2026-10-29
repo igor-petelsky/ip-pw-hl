@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Locator, Page, Response } from "@playwright/test";
 
 export class BaseStep {
   protected readonly page: Page;
@@ -10,7 +10,7 @@ export class BaseStep {
   protected async checkTextEquals(element: Locator, expectedText: string) {
     const elementName = this.getLocatorName(element);
 
-    console.info(`Checking element '${elementName}' text equals '${expectedText}'`);
+    console.log(`Checking element '${elementName}' text equals '${expectedText}'`);
 
     await expect(element).toHaveText(expectedText);
   }
@@ -23,5 +23,45 @@ export class BaseStep {
     }
 
     return element.toString();
+  }
+
+  protected async clickAndWaitForResponse(locator: Locator, url: string) {
+    try {
+      const response = this.page.waitForResponse((response) => response.url().includes(url), {
+        timeout: 5_000,
+      });
+
+      await locator.click();
+      return await response;
+    } catch (error) {
+      throw new Error(`Didn't receive expected response: ${url}`, { cause: error });
+    }
+  }
+
+  protected async clickAndWaitForResponseWithActualUrlsInfo(locator: Locator, url: string) {
+    const actualUrls: string[] = [];
+
+    const onResponse = (response: Response) => {
+      actualUrls.push(`${response.status()} ${response.url()}`);
+    };
+
+    this.page.on("response", onResponse);
+
+    const responsePromise = this.page.waitForResponse((response) => response.url().includes(url), { timeout: 10_000 });
+
+    try {
+      await locator.click();
+      return await responsePromise;
+    } catch (error) {
+      throw new Error(
+        `Failed to wait for response.\n` +
+          `Expected URL: ${url}\n` +
+          `Page URL: ${this.page.url()}\n` +
+          `Received responses:\n${actualUrls.join("\n") || "(none)"}`,
+        { cause: error },
+      );
+    } finally {
+      this.page.off("response", onResponse);
+    }
   }
 }
