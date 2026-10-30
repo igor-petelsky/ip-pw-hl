@@ -5,7 +5,8 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-.env
+.env.local
+.env.stage
 notes*
 hotkeys*
 .states

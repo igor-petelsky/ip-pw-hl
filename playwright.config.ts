@@ -1,5 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
-import 'dotenv/config';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: `.env.${process.env.ENV || 'local'}`,
+});
 
 /**
  * Read environment variables from file.
@@ -31,7 +35,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "https://qauto.forstudy.space/",
+    baseURL: process.env.BASE_URL,
 
     httpCredentials: {
       username: process.env.HTTP_USERNAME!,
