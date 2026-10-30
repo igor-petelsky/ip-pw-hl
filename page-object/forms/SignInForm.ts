@@ -1,8 +1,8 @@
 import { Locator } from "@playwright/test";
-import { BaseForm } from "../base/BaseForm";
+import { BaseStep } from "../base/BaseStep";
 import { step } from "../../utils/reports/decorator";
 
-export class SignInForm extends BaseForm {
+export class SignInForm extends BaseStep {
   private readonly emailField: Locator = this.page.getByRole("textbox", { name: "Email" });
   private readonly passwordField: Locator = this.page.getByRole("textbox", { name: "Password" });
   private readonly loginButton: Locator = this.page.getByRole("button", { name: "Login" });

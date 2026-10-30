@@ -7,22 +7,28 @@ export class BaseStep {
     this.page = page;
   }
 
+  protected async focusOnElement(element: Locator) {
+    await element.focus();
+  }
+
+  protected async blurElement(element: Locator) {
+    await element.blur();
+  }
+
+  protected async checkErrorMessageByText(text: string) {
+    await expect(this.page.getByText(text)).toBeVisible();
+  }
+
+  protected async checkElementCssValue(element: Locator, styleName: string, styleValue: string) {
+    await expect(element).toHaveCSS(styleName, styleValue);
+  }
+
   protected async checkTextEquals(element: Locator, expectedText: string) {
     const elementName = this.getLocatorName(element);
 
     console.log(`Checking element '${elementName}' text equals '${expectedText}'`);
 
     await expect(element).toHaveText(expectedText);
-  }
-
-  private getLocatorName(element: Locator): string {
-    for (const [name, value] of Object.entries(this)) {
-      if (value === element) {
-        return name;
-      }
-    }
-
-    return element.toString();
   }
 
   protected async clickAndWaitForResponse(locator: Locator, url: string) {
@@ -63,5 +69,15 @@ export class BaseStep {
     } finally {
       this.page.off("response", onResponse);
     }
+  }
+
+  private getLocatorName(element: Locator): string {
+    for (const [name, value] of Object.entries(this)) {
+      if (value === element) {
+        return name;
+      }
+    }
+
+    return element.toString();
   }
 }

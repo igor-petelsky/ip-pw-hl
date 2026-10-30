@@ -1,8 +1,8 @@
 import { expect, Locator } from "@playwright/test";
-import { BaseForm } from "../base/BaseForm";
 import { step } from "../../utils/reports/decorator";
+import { BaseStep } from "../base/BaseStep";
 
-export class AddCarForm extends BaseForm {
+export class AddCarForm extends BaseStep {
   public readonly formTitle = this.page.locator(".modal-title", { hasText: "Add a car" });
   private readonly brandDropdown = this.page.locator("#addCarBrand");
   private readonly modelDropdown = this.page.locator("#addCarModel");

@@ -37,6 +37,7 @@ export default defineConfig({
       password: "welcome2qauto",
     },
     testIdAttribute: "qa-id",
+    actionTimeout: 5_000,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on",

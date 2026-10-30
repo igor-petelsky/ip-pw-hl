@@ -1,7 +1,7 @@
 import { step } from '../../utils/reports/decorator';
-import { BaseForm } from '../base/BaseForm';
+import { BaseStep } from '../base/BaseStep';
 
-export class EditProfileForm extends BaseForm {
+export class EditProfileForm extends BaseStep {
     private readonly nameField = this.page.locator('#editProfileName');
     private readonly lastNameField = this.page.locator('#editProfileLastName');
     private readonly countryField = this.page.locator('#editProfileCountry');

@@ -1,8 +1,8 @@
 import { Locator } from "@playwright/test";
-import { BaseForm } from "../base/BaseForm";
 import { step } from "../../utils/reports/decorator";
+import { BaseStep } from "../base/BaseStep";
 
-export class SignUpForm extends BaseForm {
+export class SignUpForm extends BaseStep {
   private readonly nameField: Locator = this.page.locator("#signupName");
   private readonly lastNameField: Locator = this.page.locator("#signupLastName");
   private readonly emailField: Locator = this.page.locator("#signupEmail");
