@@ -9,11 +9,11 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.45.3-noble
     env:
-       HTTP_USERNAME: ${{ secrets.HTTP_USERNAME }}
-       HTTP_PASSWORD: ${{ secrets.HTTP_PASSWORD }}
+      HTTP_USERNAME: ${{ secrets.HTTP_USERNAME }}
+      HTTP_PASSWORD: ${{ secrets.HTTP_PASSWORD }}
+      BASE_URL: ${{ vars.BASE_URL }}
 
     steps:
-
       - name: Show current date and time
         run: |
           date
