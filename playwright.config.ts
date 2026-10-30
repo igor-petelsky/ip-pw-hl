@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import 'dotenv/config';
 
 /**
  * Read environment variables from file.
@@ -33,8 +34,8 @@ export default defineConfig({
     baseURL: "https://qauto.forstudy.space/",
 
     httpCredentials: {
-      username: "guest",
-      password: "welcome2qauto",
+      username: process.env.HTTP_USERNAME!,
+      password: process.env.HTTP_PASSWORD!,
     },
     testIdAttribute: "qa-id",
     actionTimeout: 5_000,
