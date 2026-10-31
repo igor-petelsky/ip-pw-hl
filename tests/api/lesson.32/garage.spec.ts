@@ -31,7 +31,7 @@ test.describe("Cars", () => {
     expect(brands).toHaveLength(5);
   });
 
-  test("GET car by ID", async ({ request }) => {
+  test("GET car brand by ID", async ({ request }) => {
     const response = await request.get("api/cars/brands/1", {});
 
     console.log(await response.json());
@@ -57,7 +57,7 @@ test.describe("Cars", () => {
     expect(models).toHaveLength(23);
   });
 
-  test("GET model by ID", async ({ request }) => {
+  test("GET car model by ID", async ({ request }) => {
     const response = await request.get("api/cars/models/1", {});
 
     const responseJson = await response.json();

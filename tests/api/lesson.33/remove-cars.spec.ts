@@ -1,8 +1,8 @@
 import test, { expect } from "@playwright/test";
 import { testUser1 } from "../../../test-data/validUsers";
-import { generateNewCar } from "../../../utils/factories/cars.factory";
 import GarageService from "../../../utils/api/services/GarageService";
 import AuthService from "../../../utils/api/services/AuthService";
+import { CarFactory } from "../../../utils/factories/CarFactory";
 
 let garageService: GarageService;
 let authService: AuthService;
@@ -26,9 +26,9 @@ test.describe("Removing cars", () => {
   test.beforeAll(async ({ request }) => {
     garageService = new GarageService(request);
 
-    const newCar = generateNewCar(1, 1, 123);
+    const newCar = CarFactory.fordFiesta().build();
 
-    const addedCar = await garageService.addCar(sid, newCar.carBrandId, newCar.carModelId, newCar.mileage);
+    const addedCar = await garageService.addCar(sid, newCar);
     carToRemoveId = addedCar.id;
   });
 

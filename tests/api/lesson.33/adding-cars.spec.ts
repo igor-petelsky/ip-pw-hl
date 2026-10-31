@@ -3,6 +3,8 @@ import { testUser1 } from "../../../test-data/validUsers";
 import { generateNewCar } from "../../../utils/factories/cars.factory";
 import GarageService from "../../../utils/api/services/GarageService";
 import AuthService from "../../../utils/api/services/AuthService";
+import { CarFactory } from "../../../utils/factories/CarFactory";
+import { CarBuilder } from "../../../utils/api/builders/CarBuilder";
 
 let garageService: GarageService;
 let authService: AuthService;
@@ -24,8 +26,8 @@ test.describe("Adding new cars", () => {
   let addedCarsToRemove: string[] = [];
 
   test("Add new car - Ford Fiesta", async () => {
-    const newCar = generateNewCar(3, 11, 123);
-    const addedCar = await garageService.addCar(sid, newCar.carBrandId, newCar.carModelId, newCar.mileage);
+    const newCar = CarFactory.fordFiesta().build();
+    const addedCar = await garageService.addCar(sid, newCar);
 
     expect(addedCar.carBrandId).toBe(newCar.carBrandId);
     expect(addedCar.carModelId).toBe(newCar.carModelId);
@@ -36,9 +38,10 @@ test.describe("Adding new cars", () => {
   });
 
   test("Add new car - Audi TT", async () => {
-    const newCar = generateNewCar(1, 1, 123);
+    const newCar = new CarBuilder().setBrand(1).setModel(1).setMileage(123).build();
 
-    const addedCar = await garageService.addCar(sid, newCar.carBrandId, newCar.carModelId, newCar.mileage);
+
+    const addedCar = await garageService.addCar(sid, newCar);
 
     expect(addedCar.carBrandId).toBe(newCar.carBrandId);
     expect(addedCar.carModelId).toBe(newCar.carModelId);

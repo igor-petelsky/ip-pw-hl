@@ -1,8 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config({
-  path: `.env.${process.env.ENV || 'local'}`,
+  path: `.env.${process.env.ENV || "local"}`,
 });
 
 /**
@@ -70,6 +70,11 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       dependencies: ["setup"],
       testMatch: "tests/lesson.35/*",
+    },
+
+    {
+      name: "api",
+      testMatch: "tests/api/**/*.spec.ts",
     },
 
     // {

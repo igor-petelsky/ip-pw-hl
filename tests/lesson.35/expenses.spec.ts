@@ -22,6 +22,7 @@ test.describe("Fuel Expenses tests", () => {
     garageService = new GarageService(request);
     const sid = getSidFromStorageState(".states/testuser2.json");
     await garageService.addCar(sid, 1, 1, 999);
+    await garageService.addCar(sid, 1, 1, 999);
   });
 
   test("Correct adding of expense with valid data", async ({ app }) => {
