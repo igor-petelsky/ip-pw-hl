@@ -2,7 +2,6 @@ import test, { expect } from "@playwright/test";
 import { testUser1 } from "../../../test-data/validUsers";
 import GarageService from "../../../utils/api/services/GarageService";
 import AuthService from "../../../utils/api/services/AuthService";
-import { generateNewCar } from "../../../utils/factories/cars.factory";
 import { CarFactory } from "../../../utils/factories/CarFactory";
 import { CarBuilder } from "../../../utils/api/builders/CarBuilder";
 
@@ -84,7 +83,7 @@ test.describe("Private requests", () => {
     let addedCarsToRemove: string[] = [];
 
     test("Add new car - Ford Fiesta", async () => {
-      const newCar = new CarBuilder().setBrand(1).setModel(1).setMileage(123).build();
+      const newCar = CarFactory.fordFiesta().build();
       const addedCar = await garageService.addCar(sid, newCar);
 
       expect(addedCar.carBrandId).toBe(newCar.carBrandId);

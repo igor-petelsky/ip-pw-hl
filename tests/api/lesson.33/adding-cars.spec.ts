@@ -1,6 +1,5 @@
 import test, { expect } from "@playwright/test";
 import { testUser1 } from "../../../test-data/validUsers";
-import { generateNewCar } from "../../../utils/factories/cars.factory";
 import GarageService from "../../../utils/api/services/GarageService";
 import AuthService from "../../../utils/api/services/AuthService";
 import { CarFactory } from "../../../utils/factories/CarFactory";
@@ -33,14 +32,14 @@ test.describe("Adding new cars", () => {
     expect(addedCar.carModelId).toBe(newCar.carModelId);
     expect(addedCar.initialMileage).toBe(newCar.mileage);
     expect(addedCar.id).toBeDefined();
+    expect(addedCar.brand).toBe("Ford");
+    expect(addedCar.model).toBe("Fiesta");
 
     addedCarsToRemove.push(addedCar.id);
   });
 
   test("Add new car - Audi TT", async () => {
     const newCar = new CarBuilder().setBrand(1).setModel(1).setMileage(123).build();
-
-
     const addedCar = await garageService.addCar(sid, newCar);
 
     expect(addedCar.carBrandId).toBe(newCar.carBrandId);
