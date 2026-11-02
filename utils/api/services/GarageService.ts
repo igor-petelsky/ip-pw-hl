@@ -1,5 +1,7 @@
 import { APIRequestContext, expect } from "@playwright/test";
 import { Car } from "../builders/CarBuilder";
+import { validateJSONSchema } from "../validators/validateJSONSchema";
+import { carSchema } from "../schemas/car.schema";
 
 export default class GarageService {
   private request: APIRequestContext;
@@ -36,53 +38,43 @@ export default class GarageService {
     }
   }
 
-  async removeCar(sid: string, id: string, isPositive: boolean = true) {
+  async removeCar(sid: string, id: string, isSuccess: boolean = true) {
     const response = await this.request.delete(`/api/cars/${id}`, {
       headers: {
         cookie: sid,
       },
     });
 
-    if (isPositive) {
-      return response;
-    } else {
-      const responseJson = await response.json();
-      return responseJson.data;
-    }
-  }
-
-  async addCarOld(sid: string, carBrandId: number, carModelId: number, mileage: number) {
-    const response = await this.request.post("/api/cars/", {
-      data: {
-        carBrandId,
-        carModelId,
-        mileage,
-      },
-      headers: {
-        cookie: sid,
-      },
-    });
-
     const responseJson = await response.json();
-    expect(response.status()).toBe(201);
 
-    const addedCar = responseJson.data;
-    return addedCar;
+    if (isSuccess) {
+      expect(response.status()).toBe(200);
+      expect(response.statusText()).toBe("OK");
+      expect(responseJson.data.carId).toBe(id);
+      console.log(`Car with ID: ${id} has been removed`);
+    }
+    return response;
   }
 
-  async addCar(sid: string, car: Car) {
+  async addCar(sid: string, car: Car, isSuccess = true) {
     const response = await this.request.post("/api/cars/", {
       data: car,
       headers: {
         cookie: sid,
       },
     });
-    const responseJson = await response.json();
-    console.log(responseJson);
-    expect(response.status()).toBe(201);
 
+    const responseJson = await response.json();
     const addedCar = responseJson.data;
-    return addedCar;
+
+    if (isSuccess) {
+      expect(response.status()).toBe(201);
+
+      validateJSONSchema(addedCar, carSchema);
+      return addedCar;
+    }
+
+    return response;
   }
 
   async getUserCars(sid: string) {

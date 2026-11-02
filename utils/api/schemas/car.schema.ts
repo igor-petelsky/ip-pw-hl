@@ -1,0 +1,28 @@
+export const carSchema = {
+  type: "object",
+  required: [
+    "id",
+    "carBrandId",
+    "carModelId",
+    "initialMileage",
+    "updatedMileageAt",
+    "carCreatedAt",
+    "mileage",
+    "brand",
+    "model",
+    "logo",
+  ],
+  properties: {
+    id: { type: "number" },
+    carBrandId: { type: "number" },
+    carModelId: { type: "number" },
+    initialMileage: { type: "number" },
+    updatedMileageAt: { type: "string", format: "date-time" },
+    carCreatedAt: { type: "string", format: "date-time" },
+    mileage: { type: "number" },
+    brand: { type: "string" },
+    model: { type: "string" },
+    logo: { type: "string" },
+  },
+  additionalProperties: false,
+};

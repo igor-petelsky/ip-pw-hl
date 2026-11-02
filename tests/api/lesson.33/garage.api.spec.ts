@@ -65,12 +65,10 @@ test.describe("Private requests", () => {
 
     test("Remove a car", async () => {
       const response = await garageService.removeCar(sid, carToRemoveId);
-
-      expect(response.status()).toBe(200);
     });
 
     test("Remove a car with invalid id", async () => {
-      const response = await garageService.removeCar(sid, "5325325325", true);
+      const response = await garageService.removeCar(sid, "5325325325", false);
 
       const responseJson = await response.json();
 

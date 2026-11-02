@@ -33,14 +33,11 @@ test.describe("Removing cars", () => {
   });
 
   test("Remove a car", async () => {
-    const response = await garageService.removeCar(sid, carToRemoveId);
-
-    expect(response.status()).toBe(200);
+    await garageService.removeCar(sid, carToRemoveId);
   });
 
   test("Remove a car with invalid id", async () => {
-    const response = await garageService.removeCar(sid, "5325325325", true);
-
+    const response = await garageService.removeCar(sid, "5325325325", false);
     const responseJson = await response.json();
 
     expect(response.status()).toBe(404);
