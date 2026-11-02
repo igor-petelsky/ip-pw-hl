@@ -9,7 +9,7 @@
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
-    "@playwright/test": "^1.45.3",
+    "@playwright/test": "1.45.3",
     "@types/node": "^24.19.2",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "dotenv": "^18.0.9",
-    "playwright": "^1.45.3",
-    "playwright-core": "^1.45.3",
+    "playwright": "1.45.3",
+    "playwright-core": "1.45.3",
     "undici-types": "^8.9.0"
   }
 }

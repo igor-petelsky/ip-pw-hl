@@ -12,6 +12,7 @@ import { getSidFromStorageState } from "../../utils/storageState/storageState";
 import { faker } from "@faker-js/faker";
 import { generateExpenseData } from "../../utils/factories/expenses.factory";
 import { DateUtils } from "../../utils/date/dateUtils";
+import { CarFactory } from "../../utils/factories/CarFactory";
 
 test.describe("Fuel Expenses tests", () => {
   let garageService: GarageService;
@@ -21,8 +22,7 @@ test.describe("Fuel Expenses tests", () => {
   test.beforeEach(async ({ request }) => {
     garageService = new GarageService(request);
     const sid = getSidFromStorageState(".states/testuser2.json");
-    await garageService.addCar(sid, 1, 1, 999);
-    await garageService.addCar(sid, 1, 1, 999);
+    await garageService.addCar(sid, CarFactory.fordFiesta().build());
   });
 
   test("Correct adding of expense with valid data", async ({ app }) => {
