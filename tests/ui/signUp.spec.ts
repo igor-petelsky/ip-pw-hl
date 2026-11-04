@@ -3,7 +3,7 @@ import { HomePage } from "../../page-object/pages/HomePage";
 import { SignUpForm } from "../../page-object/forms/SignUpForm";
 import { GaragePage } from "../../page-object/pages/GaragePage";
 
-test.describe("Sign up tests with POM", () => {
+test.describe("Sign up tests", () => {
   let homePage: HomePage;
   let signUpForm: SignUpForm;
   let garagePage: GaragePage;

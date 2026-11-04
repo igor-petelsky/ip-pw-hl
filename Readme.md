@@ -54,3 +54,5 @@ npx playwright test --project=e2e tests/ui/garage.spec.ts
 After test execution, open the HTML report:
 
 npx playwright show-report
+
+You can see the latest test run report via this link: https://igor-petelsky.github.io/ip-pw-hl/
