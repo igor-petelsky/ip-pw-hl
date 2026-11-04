@@ -1,4 +1,4 @@
-import { CarBuilder } from "../api/builders/CarBuilder";
+import { CarBuilder } from "../builders/CarBuilder";
 
 export class CarFactory {
   static fordFiesta(): CarBuilder {

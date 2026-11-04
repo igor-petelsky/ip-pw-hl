@@ -69,7 +69,7 @@ export default defineConfig({
       name: "e2e",
       use: { ...devices["Desktop Chrome"] },
       dependencies: ["setup"],
-      testMatch: "tests/lesson.35/*",
+      testMatch: "tests/ui/*",
     },
 
     {

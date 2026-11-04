@@ -26,9 +26,9 @@ export default class GarageService {
     return responseJson.data;
   }
 
-  async getModel(id: number, isPositive: boolean = true) {
+  async getModel(id: number, isSuccess: boolean = true) {
     const response = await this.request.get(`/api/cars/models/${id}`);
-    if (isPositive) {
+    if (isSuccess) {
       const responseJson = await response.json();
       expect(response.status()).toBe(200);
 
@@ -85,9 +85,8 @@ export default class GarageService {
     });
 
     const responseJson = await response.json();
-    expect(response.status()).toBe(201);
+    expect(response.status()).toBe(200);
 
-    const addedCar = responseJson.data;
-    return addedCar;
+    return responseJson.data;
   }
 }

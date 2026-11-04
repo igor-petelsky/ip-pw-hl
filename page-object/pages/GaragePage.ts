@@ -11,6 +11,6 @@ export class GaragePage extends BasePage {
   }
 
   async openAddCarForm() {
-    await this.addCarButton.click();
+    await this.clickAndWaitForResponse(this.addCarButton, "models")
   }
 }

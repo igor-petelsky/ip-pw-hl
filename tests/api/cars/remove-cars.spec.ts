@@ -2,7 +2,7 @@ import test, { expect } from "@playwright/test";
 import { testUser1 } from "../../../test-data/validUsers";
 import GarageService from "../../../utils/api/services/GarageService";
 import AuthService from "../../../utils/api/services/AuthService";
-import { CarFactory } from "../../../utils/factories/CarFactory";
+import { CarFactory } from "../../../utils/api/factories/CarFactory";
 
 let garageService: GarageService;
 let authService: AuthService;

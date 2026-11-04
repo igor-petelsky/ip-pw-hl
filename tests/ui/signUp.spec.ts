@@ -33,19 +33,19 @@ test.describe("Sign up tests with POM", () => {
   test("Name field - empty field", async () => {
     await signUpForm.focusOnName();
     await signUpForm.blurName();
-    await signUpForm.checkErrorMessageByText("Name required");
+    await signUpForm.checkErrorMessageVisible("Name required");
   });
 
   test("Name field - wrong data", async () => {
     await signUpForm.fillName("@#");
     await signUpForm.blurName();
-    await signUpForm.checkErrorMessageByText("Name is invalid");
+    await signUpForm.checkErrorMessageVisible("Name is invalid");
   });
 
   test("Name field - wrong length", async () => {
     await signUpForm.fillName("q");
     await signUpForm.blurName();
-    await signUpForm.checkErrorMessageByText("Name has to be from 2 to 20 characters long");
+    await signUpForm.checkErrorMessageVisible("Name has to be from 2 to 20 characters long");
   });
 
   test("Name field - border red", async () => {
@@ -57,19 +57,19 @@ test.describe("Sign up tests with POM", () => {
   test("Last name field - empty field", async () => {
     await signUpForm.focusOnLastName();
     await signUpForm.blurLastName();
-    await signUpForm.checkErrorMessageByText("Last name required");
+    await signUpForm.checkErrorMessageVisible("Last name required");
   });
 
   test("Last name field - wrong data", async () => {
     await signUpForm.fillLastName("!@#");
     await signUpForm.blurLastName();
-    await signUpForm.checkErrorMessageByText("Last name is invalid");
+    await signUpForm.checkErrorMessageVisible("Last name is invalid");
   });
 
   test("Last name field - wrong length", async () => {
     await signUpForm.fillLastName("q");
     await signUpForm.blurLastName();
-    await signUpForm.checkErrorMessageByText("Last name has to be from 2 to 20 characters long");
+    await signUpForm.checkErrorMessageVisible("Last name has to be from 2 to 20 characters long");
   });
 
   test("Last name field - border red", async () => {
@@ -81,13 +81,13 @@ test.describe("Sign up tests with POM", () => {
   test("Email field - empty field", async () => {
     await signUpForm.focusOnEmail();
     await signUpForm.blurEmail();
-    await signUpForm.checkErrorMessageByText("Email required");
+    await signUpForm.checkErrorMessageVisible("Email required");
   });
 
   test("Email field - wrong data", async () => {
     await signUpForm.fillEmail("!@# ");
     await signUpForm.blurEmail();
-    await signUpForm.checkErrorMessageByText("Email is incorrect");
+    await signUpForm.checkErrorMessageVisible("Email is incorrect");
   });
 
   test("Email field - border red", async () => {
@@ -99,13 +99,13 @@ test.describe("Sign up tests with POM", () => {
   test("Password field - empty field", async () => {
     await signUpForm.focusOnPassword();
     await signUpForm.blurPassword();
-    await signUpForm.checkErrorMessageByText("Password required");
+    await signUpForm.checkErrorMessageVisible("Password required");
   });
 
   test("Password field - wrong length", async () => {
     await signUpForm.fillPassword("!");
     await signUpForm.blurPassword();
-    await signUpForm.checkErrorMessageByText(
+    await signUpForm.checkErrorMessageVisible(
       "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter",
     );
   });
@@ -119,14 +119,14 @@ test.describe("Sign up tests with POM", () => {
   test("Re-enter password field - empty field", async () => {
     await signUpForm.focusOnRepeatPassword();
     await signUpForm.blurRepeatPassword();
-    await signUpForm.checkErrorMessageByText("Re-enter password required");
+    await signUpForm.checkErrorMessageVisible("Re-enter password required");
   });
 
   test("Re-enter password field - passwords do not match", async () => {
     await signUpForm.fillPassword("Demo1234");
     await signUpForm.fillRepeatPassword("Demo12345");
     await signUpForm.blurRepeatPassword();
-    await signUpForm.checkErrorMessageByText("Passwords do not match");
+    await signUpForm.checkErrorMessageVisible("Passwords do not match");
   });
 
   test("Re-enter password field - border red", async () => {

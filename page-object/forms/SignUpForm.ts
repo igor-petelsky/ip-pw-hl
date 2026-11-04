@@ -118,4 +118,9 @@ export class SignUpForm extends BaseStep {
   async checkRepeatPasswordFieldBorderRed() {
     await this.checkFieldBorderRed(this.repeatPasswordField);
   }
+
+  @step()
+  async checkErrorMessageVisible(errorMessage: string) {
+    await this.checkErrorMessageByText(errorMessage);
+  }
 }

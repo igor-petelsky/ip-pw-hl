@@ -10,9 +10,9 @@ import { expect, test } from "../../utils/fixtures/pagesFixtures";
 import GarageService from "../../utils/api/services/GarageService";
 import { getSidFromStorageState } from "../../utils/storageState/storageState";
 import { faker } from "@faker-js/faker";
-import { generateExpenseData } from "../../utils/factories/expenses.factory";
+import { generateExpenseData } from "../../utils/api/factories/expenses.factory";
 import { DateUtils } from "../../utils/date/dateUtils";
-import { CarFactory } from "../../utils/factories/CarFactory";
+import { CarFactory } from "../../utils/api/factories/CarFactory";
 
 test.describe("Fuel Expenses tests", () => {
   let garageService: GarageService;

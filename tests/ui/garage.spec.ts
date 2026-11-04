@@ -33,8 +33,8 @@ test.describe('Garage tests', () => {
         test.afterEach(async ({ request }) => {
             garageService = new GarageService(request);
             const sid = getSidFromStorageState('.states/testuser1.json');
-            const allAddedCars = await garageService.getUserCars(sid);
-            const lastAddedCarId = allAddedCars.data[0].id;
+            const allUserCars = await garageService.getUserCars(sid);
+            const lastAddedCarId = allUserCars[0].id;
             await garageService.removeCar(sid, lastAddedCarId);
         })
     })
