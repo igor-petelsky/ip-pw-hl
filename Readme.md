@@ -12,7 +12,7 @@ End-to-end test automation project built with **Playwright** and **TypeScript**.
 Clone the repository:
 
 git clone https://github.com/igor-petelsky/ip-pw-hl.git
-cd <project-directory>
+cd to project-directory
 
 Install dependencies:
 
@@ -21,6 +21,19 @@ npm install
 Install Playwright browsers:
 
 npx playwright install
+
+## Environment Configuration
+
+The website is protected by HTTP Basic Authentication.
+
+Before running the tests, create a .env.local file in the project root directory and request the authentication credentials from the project owner.
+
+Add the following variables:
+
+HTTP_USERNAME=""
+HTTP_PASSWORD=""
+
+Replace the empty values with the provided credentials.
 
 ## Running Tests
 
@@ -41,5 +54,3 @@ npx playwright test --project=e2e tests/ui/garage.spec.ts
 After test execution, open the HTML report:
 
 npx playwright show-report
-
-
