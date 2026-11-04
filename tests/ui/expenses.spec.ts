@@ -10,7 +10,7 @@ import { expect, test } from "../../utils/fixtures/pagesFixtures";
 import GarageService from "../../utils/api/services/GarageService";
 import { getSidFromStorageState } from "../../utils/storageState/storageState";
 import { faker } from "@faker-js/faker";
-import { generateExpenseData } from "../../utils/api/factories/expenses.factory";
+import { generateExpenseData } from "../../test-data/expenses.factory";
 import { DateUtils } from "../../utils/date/dateUtils";
 import { CarFactory } from "../../utils/api/factories/CarFactory";
 
