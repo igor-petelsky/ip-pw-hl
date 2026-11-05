@@ -7,12 +7,14 @@ import { AddExpenseForm } from "../../page-object/forms/AddExpenseForm";
 import { ExpensesPage } from "../../page-object/pages/ExpensesPage";
 import { ProfilePage } from "../../page-object/pages/ProfilePage";
 import { EditProfileForm } from "../../page-object/forms/EditProfileForm";
+import { SignUpForm } from "../../page-object/forms/SignUpForm";
 
 type App = {
   page: Page;
   garagePage: GaragePage;
   homePage: HomePage;
   signInForm: SignInForm;
+  signUpForm: SignUpForm;
   addCarForm: AddCarForm;
   addExpenseForm: AddExpenseForm;
   expensesPage: ExpensesPage;
@@ -27,6 +29,7 @@ export const test = base.extend<{ app: App }>({
       garagePage: new GaragePage(page),
       homePage: new HomePage(page),
       signInForm: new SignInForm(page),
+      signUpForm: new SignUpForm(page),
       addCarForm: new AddCarForm(page),
       addExpenseForm: new AddExpenseForm(page),
       expensesPage: new ExpensesPage(page),
