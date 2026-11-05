@@ -28,6 +28,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [["html"], ["./utils/reports/CustomReporter.ts"]],
+
   expect: {
     timeout: 5_000,
   },
@@ -56,19 +57,24 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "setup",
-      testMatch: "**/setup/**.setup.ts",
-      // workers: 1 (unsupported: old pw vers?)
+      name: "delete-users",
+      testMatch: "**/deleteUsers.setup.ts",
     },
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-      dependencies: ["setup"],
+      name: "create-users",
+      testMatch: "**/createUsers.setup.ts",
+      dependencies: ["delete-users"],
     },
+    {
+      name: "get-states",
+      testMatch: "**/getStates.setup.ts",
+      dependencies: ["create-users"],
+    },
+
     {
       name: "e2e",
       use: { ...devices["Desktop Chrome"] },
-      dependencies: ["setup"],
+      dependencies: ["get-states"],
       testMatch: "tests/ui/*",
     },
 
