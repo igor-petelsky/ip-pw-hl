@@ -19,43 +19,36 @@ test.describe("Fuel Expenses tests", () => {
 
   test.use({ storageState: ".states/testuser2.json" });
 
-  test.beforeEach(async ({ request }) => {
+  test.beforeEach(async ({ request, app }) => {
     garageService = new GarageService(request);
     const sid = getSidFromStorageState(".states/testuser2.json");
+    
     await garageService.addCar(sid, CarFactory.fordFiesta().build());
+    await app.expensesPage.navigate();
+    await app.expensesPage.openAddExpenseForm();
   });
 
   test("Correct adding of expense with valid data", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData();
     const todayDate = DateUtils.getDateWithOffset(0);
 
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.addNewExpense(mileage, numberOfLiters, totalCost);
     await app.expensesPage.verifyLastExpense(todayDate, mileage, numberOfLiters, totalCost);
   });
 
   test("Validation - future date", async ({ app }) => {
     const futureDate = faker.date.future().toISOString();
-
     const year = futureDate.slice(0, 4);
     const month = futureDate.slice(5, 7);
     const day = futureDate.slice(8, 10);
-
     const { mileage, numberOfLiters, totalCost } = generateExpenseData();
 
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.addNewExpense(mileage, numberOfLiters, totalCost, undefined, `${day}.${month}.${year}`);
     await expect(app.addExpenseForm.futureDateErrorMessage).toBeVisible();
   });
 
   test("Validation - adding expense with current number of mileage", async ({ app }) => {
     const { numberOfLiters, totalCost } = generateExpenseData();
-
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
-
     const newMileage = await app.addExpenseForm.mileageField.inputValue();
 
     await app.addExpenseForm.addNewExpense(newMileage, numberOfLiters, totalCost);
@@ -65,8 +58,6 @@ test.describe("Fuel Expenses tests", () => {
   test("Validation - zero or negative number of liters", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData({ litersMin: -10, litersMax: 0 });
 
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.enterMileage(mileage);
     await app.addExpenseForm.enterNumberOfLiters(numberOfLiters);
     await app.addExpenseForm.enterTotalCost(totalCost);
@@ -77,8 +68,6 @@ test.describe("Fuel Expenses tests", () => {
   test("Validation - zero or negative total cost", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData({ costMin: -10, costMax: 0 });
 
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.enterMileage(mileage);
     await app.addExpenseForm.enterNumberOfLiters(numberOfLiters);
     await app.addExpenseForm.enterTotalCost(totalCost);
@@ -88,8 +77,6 @@ test.describe("Fuel Expenses tests", () => {
   test("Validation - more than 9999 liters", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData({ litersMin: 10000, litersMax: 500000 });
 
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.enterMileage(mileage);
     await app.addExpenseForm.enterNumberOfLiters(numberOfLiters);
     await app.addExpenseForm.enterTotalCost(totalCost);
@@ -99,8 +86,6 @@ test.describe("Fuel Expenses tests", () => {
   test("Validation - more than 1000000 total cost", async ({ app }) => {
     const { mileage, numberOfLiters, totalCost } = generateExpenseData({ costMin: 10000001, costMax: 100000000 });
 
-    await app.expensesPage.navigate();
-    await app.expensesPage.openAddExpenseForm();
     await app.addExpenseForm.enterMileage(mileage);
     await app.addExpenseForm.enterNumberOfLiters(numberOfLiters);
     await app.addExpenseForm.enterTotalCost(totalCost);
