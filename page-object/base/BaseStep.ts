@@ -15,7 +15,7 @@ export class BaseStep {
     await element.blur();
   }
 
-  protected async checkErrorMessageByText(text: string) {
+  public async checkErrorMessageByText(text: string) {
     await expect(this.page.getByText(text)).toBeVisible();
   }
 

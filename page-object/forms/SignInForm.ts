@@ -1,15 +1,39 @@
 import { Locator } from "@playwright/test";
 import { BaseStep } from "../base/BaseStep";
 import { step } from "../../utils/reports/decorator";
+import { errorMessages } from "../../data/errorMessages";
+import { currentLanguage } from "../../data/localization";
 
 export class SignInForm extends BaseStep {
-  private readonly emailField: Locator = this.page.getByRole("textbox", { name: "Email" });
-  private readonly passwordField: Locator = this.page.getByRole("textbox", { name: "Password" });
-  private readonly loginButton: Locator = this.page.getByRole("button", { name: "Login" });
-  public readonly emptyEmailMessage: Locator = this.page.getByText("Email required");
-  public readonly emptyPasswordMessage: Locator = this.page.getByText("Password required");
-  public readonly wrongEmailMessage: Locator = this.page.getByText("Email is incorrect");
-  public readonly wrongCredentialsMessage: Locator = this.page.getByText("Wrong email or password");
+  private static readonly EMAIL = "email";
+  private static readonly PASSWORD = "password";
+
+  private emailField: Locator = this.getFieldByName(SignInForm.EMAIL);
+  private emailErrorMessage: Locator = this.getErrorMessageByFieldName(SignInForm.EMAIL);
+  private passwordField: Locator = this.getFieldByName(SignInForm.PASSWORD);
+  private passwordErrorMessage: Locator = this.getErrorMessageByFieldName(SignInForm.PASSWORD);
+  private loginButton: Locator = this.page.locator("//app-signin-modal//*[@class='btn btn-primary']");
+  private alert: Locator = this.page.locator("//*[@class='alert alert-danger']");
+
+  @step()
+  async checkEmptyEmailErrorMessage() {
+    await this.checkTextEquals(this.emailErrorMessage, errorMessages[currentLanguage].emailRequired);
+  }
+
+  @step()
+  async checkEmptyPasswordErrorMessage() {
+    await this.checkTextEquals(this.passwordErrorMessage, errorMessages[currentLanguage].passwordRequired);
+  }
+
+  @step()
+  async checkIncorrectEmailErrorMessage() {
+    await this.checkTextEquals(this.emailErrorMessage, errorMessages[currentLanguage].emailIncorrect);
+  }
+
+  @step()
+  async checkWrongCredentialsErrorMessage() {
+    await this.checkTextEquals(this.alert, errorMessages[currentLanguage].wrongCredentials);
+  }
 
   @step()
   async signInWithCredentials(email: string, password: string) {
@@ -37,9 +61,9 @@ export class SignInForm extends BaseStep {
   async triggerErrorOnField(fieldName: string) {
     let field: Locator;
 
-    if (fieldName === "email") {
+    if (fieldName === SignInForm.EMAIL) {
       field = this.emailField;
-    } else if (fieldName === "password") {
+    } else if (fieldName === SignInForm.PASSWORD) {
       field = this.passwordField;
     } else {
       throw new Error("Wrong field name");
@@ -47,5 +71,13 @@ export class SignInForm extends BaseStep {
 
     await field.focus();
     await field.blur();
+  }
+
+  private getFieldByName(name: string) {
+    return this.page.locator(`//input[@name='${name}']`);
+  }
+
+  private getErrorMessageByFieldName(name: string) {
+    return this.getFieldByName(name).locator("xpath=following-sibling::*[contains(@class, 'invalid-feedback')]");
   }
 }
